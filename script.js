@@ -131,15 +131,21 @@ async function refreshAccountUI() {
     } catch (_) { /* keep fallback label */ }
     accountName.textContent = label;
     accountBox.hidden = false;
+    logoutBtn.hidden = false;
     signInBtn.hidden = true;
   } else {
     accountBox.hidden = true;
+    logoutBtn.hidden = true;
     signInBtn.hidden = false;
   }
 }
 
-logoutBtn.addEventListener('click', () => {
-  puter.auth.signOut();
+logoutBtn.addEventListener('click', async () => {
+  logoutBtn.disabled = true;
+  try {
+    await puter.auth.signOut();
+  } catch (_) { /* ignore sign-out errors */ }
+  logoutBtn.disabled = false;
   refreshAccountUI();
 });
 
