@@ -5,6 +5,10 @@ const promptInput = document.getElementById('promptInput');
 const sendBtn = document.getElementById('sendBtn');
 const modelSelect = document.getElementById('modelSelect');
 const clearBtn = document.getElementById('clearBtn');
+const accountBox = document.getElementById('accountBox');
+const accountName = document.getElementById('accountName');
+const logoutBtn = document.getElementById('logoutBtn');
+const signInBtn = document.getElementById('signInBtn');
 
 // Full conversation history sent to the model on every turn.
 let history = [];
@@ -114,3 +118,36 @@ clearBtn.addEventListener('click', () => {
   chatLog.appendChild(emptyState);
   emptyState.style.display = 'block';
 });
+
+// Puter.js keeps exactly one signed-in account per browser — there is no
+// API for multiple simultaneous accounts, so this reflects that single
+// active session (with its own dedicated sign-in / log-out control).
+async function refreshAccountUI() {
+  if (puter.auth.isSignedIn()) {
+    let label = 'Signed in';
+    try {
+      const user = await puter.auth.getUser();
+      if (user && user.username) label = user.username;
+    } catch (_) { /* keep fallback label */ }
+    accountName.textContent = label;
+    accountBox.hidden = false;
+    signInBtn.hidden = true;
+  } else {
+    accountBox.hidden = true;
+    signInBtn.hidden = false;
+  }
+}
+
+logoutBtn.addEventListener('click', () => {
+  puter.auth.signOut();
+  refreshAccountUI();
+});
+
+signInBtn.addEventListener('click', async () => {
+  try {
+    await puter.auth.signIn();
+  } catch (_) { /* user closed the popup */ }
+  refreshAccountUI();
+});
+
+refreshAccountUI();

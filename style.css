@@ -92,6 +92,43 @@ html,body{
 }
 #modelSelect:focus-visible{outline:2px solid var(--accent); outline-offset:1px;}
 
+.account-box{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:var(--panel-2);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:6px 8px 6px 12px;
+  white-space:nowrap;
+}
+.account-name{
+  font-family:var(--font-mono);
+  font-size:0.78rem;
+  color:var(--text);
+  max-width:120px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.account-name::before{
+  content:'●';
+  color:#5FB878;
+  font-size:0.6rem;
+  margin-right:6px;
+}
+.logout-btn{
+  background:transparent;
+  color:var(--text-dim);
+  border:1px solid var(--border);
+  border-radius:6px;
+  padding:4px 9px;
+  font-family:var(--font-body);
+  font-size:0.76rem;
+  cursor:pointer;
+}
+.logout-btn:hover{color:var(--text); border-color:var(--text-dim);}
+.logout-btn:focus-visible{outline:2px solid var(--accent); outline-offset:1px;}
+
 .clear-btn{
   background:transparent;
   color:var(--text-dim);
