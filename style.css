@@ -75,14 +75,20 @@ html,body{
 #modelSelect{
   flex:1;
   min-width:0;
-  background:var(--panel-2);
+  background-color:var(--panel-2);
   color:var(--text);
   border:1px solid var(--border);
   border-radius:8px;
-  padding:8px 10px;
+  padding:8px 34px 8px 10px;
   font-family:var(--font-mono);
   font-size:0.82rem;
   cursor:pointer;
+  appearance:none;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%239A9CA3' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
 }
 #modelSelect:focus-visible{outline:2px solid var(--accent); outline-offset:1px;}
 
